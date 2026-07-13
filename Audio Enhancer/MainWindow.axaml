@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="640"
+        x:Class="Audio_Enhancer.MainWindow"
+        Title="Audio Enhancer"
+        Width="600" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        DragDrop.AllowDrop="True">
+
+    <StackPanel Margin="28" Spacing="20">
+
+        <StackPanel Spacing="2">
+            <TextBlock Text="Audio Enhancer" FontSize="26" FontWeight="Bold"/>
+            <TextBlock Text="WAV → 24-bit / 48 kHz high-res" FontSize="14" Opacity="0.65"/>
+        </StackPanel>
+
+        <Border x:Name="DropZone"
+                BorderThickness="2" CornerRadius="10" Padding="20"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                Background="{DynamicResource SystemControlBackgroundListLowBrush}">
+            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                <TextBlock Text="Drag &amp; drop a WAV file here" HorizontalAlignment="Center" Opacity="0.75"/>
+                <Button x:Name="BrowseButton" Content="Choose file…"
+                        HorizontalAlignment="Center" Click="OnBrowseClick"/>
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="InfoPanel" IsVisible="False"
+                CornerRadius="10" Padding="16,12"
+                Background="{DynamicResource SystemControlBackgroundListLowBrush}">
+            <StackPanel Spacing="4">
+                <TextBlock x:Name="FileNameText" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="FileInfoText" Opacity="0.7" FontSize="13"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Spacing="8">
+            <TextBlock Text="Enhancements" FontWeight="SemiBold"/>
+            <CheckBox x:Name="NormalizeCheck" IsChecked="True"
+                      Content="Normalize loudness (peak to −1 dB)"/>
+            <CheckBox x:Name="DcOffsetCheck" IsChecked="True"
+                      Content="Remove DC offset (center the signal)"/>
+            <TextBlock Text="Output: WAV 48 kHz / 24-bit — the recording content stays untouched, only quality and loudness are improved."
+                       Opacity="0.6" FontSize="12" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Button x:Name="EnhanceButton" Classes="accent"
+                Content="Enhance and save…" IsEnabled="False"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Padding="0,10" FontSize="15"
+                Click="OnEnhanceClick"/>
+
+        <StackPanel Spacing="8">
+            <ProgressBar x:Name="Progress" Minimum="0" Maximum="1" IsVisible="False"/>
+            <TextBlock x:Name="StatusText" Opacity="0.85" FontSize="13" TextWrapping="Wrap"/>
+        </StackPanel>
+
+    </StackPanel>
+</Window>
